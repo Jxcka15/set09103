@@ -7,6 +7,7 @@ const breakSound = document.createElement("audio");
 const drop = document.createElement("audio");
 let rotatedShape;
 let gameInterval; // Global declaration
+let score = 0;
 
 bgm.setAttribute("src", "./assets/bgm.mp3");
 bgm.muted = true;
@@ -16,6 +17,18 @@ breakSound.muted = true;
 
 drop.setAttribute("src", "./assets/drop.mp3");
 drop.muted = true;
+
+// Function to update the player's score
+function updateScore(rowsCleared) {
+    // Define a scoring system (you can adjust these values)
+    const scoringSystem = [0, 100, 300, 500, 800];
+  
+    // Increment the score based on the number of rows cleared
+    score += scoringSystem[rowsCleared];
+  
+    // Update the score display on your HTML page
+    document.getElementById('score').textContent = `Score: ${score}`;
+  }
 
 // init board
 for (let row = 0; row < BOARD_HEIGHT; row++) {
@@ -168,31 +181,35 @@ function showGameOver() {
 function restartGame() {
     // Hide the game-over message
     document.getElementById('gameOverMessage').style.display = 'none';
-
+  
     // Reset the game board to all zeroes (empty state)
     for (let row = 0; row < BOARD_HEIGHT; row++) {
-        for (let col = 0; col < BOARD_WIDTH; col++) {
-            board[row][col] = 0;
-        }
+      for (let col = 0; col < BOARD_WIDTH; col++) {
+        board[row][col] = 0;
+      }
     }
-
+  
     // Clear the visual representation of the board
-    document.getElementById("game_board").innerHTML = "";
-
+    document.getElementById('game_board').innerHTML = '';
+  
+    // Reset the score to 0
+    score = 0;
+    document.getElementById('score').textContent = 'Score: 0'; // Update the score display
+  
     // Generate a new current tetromino and reset its position
     currentTetromino = randomTetromino();
     currentTetromino.row = 0;
     currentTetromino.col = Math.floor(Math.random() * (BOARD_WIDTH - currentTetromino.shape[0].length + 1));
-
+  
     // Optionally reset other game states like score, if applicable
-
+  
     // Redraw the initial state of the game
     drawTetromino();
-
+  
     // If you use an interval or timeout for moving the tetromino down, reset it
     clearInterval(gameInterval); // Clear the existing interval
-    gameInterval = setInterval(() => moveTetromino("down"), 500); // Start a new interval
-}
+    gameInterval = setInterval(() => moveTetromino('down'), 500); // Start a new interval
+  }
 
 
 
@@ -221,7 +238,6 @@ currentTetromino = randomTetromino();
   // Check if any rows need to be cleared
   let rowsCleared = clearRows();
   if (rowsCleared > 0) {
-    // updateScore(rowsCleared);
   }
 
   // Create a new tetromino
@@ -231,7 +247,6 @@ currentTetromino = randomTetromino();
   function clearRows() {
     let rowsCleared = 0;
   
-    
     for (let y = BOARD_HEIGHT - 1; y >= 0; y--) {
       let rowFilled = true;
   
@@ -274,6 +289,7 @@ currentTetromino = randomTetromino();
         y++;
       }
     }
+    updateScore(rowsCleared);
   
     return rowsCleared;
   }
