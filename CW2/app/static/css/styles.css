@@ -8,11 +8,6 @@ body {
     padding: 0;
   }
   
-  .logo {
-    display: block;
-    margin: 0 auto 20px;
-  }
-  
   #game_board {
     width: 240px;
     height: 480px;
@@ -44,4 +39,52 @@ body {
     box-shadow: inset 3px 3px 0 rgba(255, 255, 255, 0.3);
   }
 
+
+@keyframes rainbow-text-animation {
+  0%, 100% {
+      background-position: 0 0;
+  }
+  50% {
+      background-position: 100% 0;
+  }
+}
+
+.tetris-h1 {
+  background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: rainbow-text-animation 5s ease infinite;
+  background-size: 400% 100%;
+  font-size: 46px;
+}
+
+#score {
+  font-size: 24px; 
+  font-weight: bold; 
+  background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: rainbow-text-animation 5s ease infinite;
+  background-size: 400% 100%;
+}
+
+#score-form label {
+  font-weight: bold; 
+  color: white;      
+}
+
+.game-over {
+  font-weight: bold;
+  color: white;      
+}
   
+a {
+  color: white; 
+  text-decoration: none; 
+}
+
+a:hover {
+  text-decoration: underline; 
+}

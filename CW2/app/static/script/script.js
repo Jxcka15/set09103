@@ -9,15 +9,6 @@ let rotatedShape;
 let gameInterval; // Global declaration
 let score = 0;
 
-bgm.setAttribute("src", "./assets/bgm.mp3");
-bgm.muted = true;
-
-breakSound.setAttribute("src", "./assets/break.mp3");
-breakSound.muted = true;
-
-drop.setAttribute("src", "./assets/drop.mp3");
-drop.muted = true;
-
 // Function to update the player's score
 function updateScore(rowsCleared) {
     // Define a scoring system (you can adjust these values)
